@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Financial News Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Financial News Sentiment Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    /* Reset */
     * {
       margin: 0;
       padding: 0;
@@ -13,165 +14,177 @@
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    header {
-      background-color: #ffffff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #007BFF;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #333;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #007BFF;
-    }
-
-    main {
-      flex: 1;
-      padding: 2rem;
-    }
-
-    .news-card {
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .news-card h2 {
-      font-size: 1.5rem;
-      color: #007BFF;
-    }
-
-    .news-card p {
-      margin-top: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      padding: 0;
       line-height: 1.6;
     }
 
-    footer {
-      background-color: #f1f1f1;
+    header {
+      background-color: #1f1b24;
+      padding: 20px 40px;
       text-align: center;
-      padding: 1rem;
-      margin-top: auto;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    button.upgrade-btn {
-      background-color: #007BFF;
+    header h1 {
+      font-size: 2.5rem;
+      color: #ff6f61;
+    }
+
+    nav {
+      background: #2a2833;
+      padding: 15px 0;
+      text-align: center;
+      border-bottom: 2px solid #444;
+    }
+
+    nav a {
+      color: #ffcc00;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffaa33;
+    }
+
+    .hero-section {
+      background: linear-gradient(to right, #ff6f61, #ffaa33);
+      color: #121212;
+      padding: 60px 20px;
+      text-align: center;
+      border-radius: 15px;
+      margin: 20px;
+    }
+
+    .hero-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+    }
+
+    .news-container {
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      padding: 0 20px;
+    }
+
+    .news-card {
+      background: #2a2833;
+      padding: 25px;
+      border-radius: 12px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .news-title {
+      font-size: 1.75rem;
+      color: #ffcc00;
+      margin-bottom: 12px;
+    }
+
+    .news-date {
+      color: #a1a1a1;
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    .news-content {
+      color: #d6d6d6;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      text-align: center;
+      background: #1f1b24;
+      padding: 20px;
+      color: #bbbbbb;
+      font-size: 0.95rem;
+      margin-top: 40px;
+      border-radius: 12px 12px 0 0;
+    }
+
+    /* Enhanced Sentiment Badge Styles */
+    .sentiment-badge {
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 15px;
       color: #ffffff;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
     }
 
-    button.upgrade-btn:hover {
-      background-color: #0056b3;
+    .positive {
+      background-color: #43a047;
     }
 
-    .search-bar {
-      margin-bottom: 2rem;
-      display: flex;
-      justify-content: center;
+    .negative {
+      background-color: #e53935;
     }
 
-    .search-bar input {
-      width: 50%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .search-bar button {
-      padding: 0.75rem;
-      border: none;
-      background-color: #007BFF;
-      color: white;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    .search-bar button:hover {
-      background-color: #0056b3;
+    .neutral {
+      background-color: #fb8c00;
     }
   </style>
 </head>
 <body>
   <header>
-    <nav>
-      <div class="logo">Financial News</div>
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Markets</a>
-        <a href="#">Economy</a>
-        <a href="#">Investments</a>
-        <a href="#">Contact</a>
-      </div>
-    </nav>
+    <h1>Financial News Sentiment Analysis</h1>
   </header>
 
-  <main>
-    <div class="search-bar">
-      <input type="text" placeholder="Search financial news...">
-      <button>Search</button>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">News</a>
+    <a href="#">Sentiment Reports</a>
+    <a href="#">About Us</a>
+  </nav>
+
+  <section class="hero-section">
+    <h2>Discover the Latest Financial Insights</h2>
+    <p>Stay updated with market trends and sentiment analysis to make informed financial decisions.</p>
+  </section>
+
+  <div class="news-container">
+    <div class="news-card">
+      <div class="news-title">Tech Stocks Surge Amidst Market Recovery</div>
+      <div class="news-date">February 6, 2025</div>
+      <div class="news-content">The technology sector saw significant gains today as investors responded positively to recent economic indicators...</div>
+      <div class="sentiment-badge positive">Positive Sentiment</div>
     </div>
 
     <div class="news-card">
-      <h2>Stock Market Hits Record High</h2>
-      <p>The stock market reached new heights today as tech stocks soared. Investors are optimistic about the future despite economic uncertainties...</p>
-      <button class="upgrade-btn">Read More</button>
+      <div class="news-title">Oil Prices Decline Due to Global Supply Issues</div>
+      <div class="news-date">February 6, 2025</div>
+      <div class="news-content">Global oil prices fell sharply as markets reacted to ongoing geopolitical tensions...</div>
+      <div class="sentiment-badge negative">Negative Sentiment</div>
     </div>
 
     <div class="news-card">
-      <h2>Global Economic Trends 2025</h2>
-      <p>Economists predict a mixed outlook for 2025, with emerging markets showing signs of recovery while developed nations brace for potential recessions...</p>
-      <button class="upgrade-btn">Read More</button>
+      <div class="news-title">Stable Employment Reports Keep Markets Calm</div>
+      <div class="news-date">February 6, 2025</div>
+      <div class="news-content">Employment reports remained steady, bringing a balanced outlook for market stability...</div>
+      <div class="sentiment-badge neutral">Neutral Sentiment</div>
     </div>
-  </main>
+  </div>
 
   <footer>
-    
-    <p>&copy; 2025 Financial News Portal. All rights reserved.</p>
+    &copy; 2025 Financial News Sentiment Analysis Platform
   </footer>
-
-  <script>
-    document.querySelectorAll('.upgrade-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        alert('Upgrade feature coming soon! Stay tuned.');
-      });
-    });
-  </script>
 </body>
 </html>
