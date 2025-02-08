@@ -97,24 +97,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>Know Sentiment</h1>
-    <form>
+    <h1>Financial Sentiment</h1>
+    <form action="/predict" method="POST">
     <textarea placeholder="Enter your message here..."></textarea>
     <div class="button-container">
-      <button onclick="predictSentiment()">Know Sentiment</button>
+      <button onclick="submit">Know Sentiment</button>
     </div>
   </div>
 </form>
 
-  <script>
-    function predictSentiment() {
-      const message = document.querySelector('textarea').value.trim();
-      if (message) {
-        alert(`Analyzing sentiment for: "${message}"`);
-      } else {
-        alert('Please enter a message to analyze.');
-      }
-    }
-  </script>
+  
 </body>
 </html>
