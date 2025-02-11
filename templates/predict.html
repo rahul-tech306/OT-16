@@ -93,19 +93,27 @@
       transform: translateY(0);
       box-shadow: none;
     }
+
+    /* Error message styling */
+    .error {
+      color: #ff6b6b;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Financial Sentiment</h1>
-    <form action="/predict" method="POST">
-    <textarea placeholder="Enter your message here..."></textarea>
-    <div class="button-container">
-      <button onclick="submit">Know Sentiment</button>
+  <body>
+    <div class="container">
+        <h1>Sentiment Prediction</h1>
+        <form action="/predict" method="POST">
+            <textarea name="message" placeholder="Enter your message..." required></textarea>
+            <br><br>
+            <button type="submit" class="btn">Know Sentiment</button>
+        </form>
+        <div class="footer">
+            <p>Powered by Your Sentiment Analysis Model</p>
+        </div>
     </div>
-  </div>
-</form>
-
-  
-</body>
-</html>
+  </body>
+  </html>
